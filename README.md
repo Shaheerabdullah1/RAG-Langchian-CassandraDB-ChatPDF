@@ -61,8 +61,6 @@ CASSANDRA_KEYSPACE=rag_system
 
 # LLM Configuration
 OPENAI_API_KEY=your_openai_api_key_here
-# OR
-HUGGINGFACE_API_KEY=your_huggingface_api_key_here
 
 # Vector Database Settings
 EMBEDDING_DIMENSION=1536
@@ -90,122 +88,6 @@ rag = RAGQuestionAnswering()
 question = "What is the main topic of the uploaded documents?"
 answer = rag.ask_question(question)
 print(f"Answer: {answer}")
-📁 Project Structure
-rag-question-answering/
-├── src/
-│   ├── __init__.py
-│   ├── rag_system.py          # Main RAG implementation
-│   ├── database/
-│   │   ├── __init__.py
-│   │   ├── cassandra_client.py # CassandraDB connection and operations
-│   │   └── vector_store.py     # Vector storage and retrieval
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── embeddings.py       # Embedding generation
-│   │   └── llm_client.py       # LLM interaction
-│   └── utils/
-│       ├── __init__.py
-│       ├── document_loader.py  # Document processing
-│       └── config.py           # Configuration management
-├── scripts/
-│   ├── setup_database.py      # Database initialization
-│   ├── load_documents.py      # Document ingestion
-│   └── main.py                 # Main application entry point
-├── tests/
-│   ├── __init__.py
-│   ├── test_rag_system.py
-│   └── test_database.py
-├── requirements.txt
-├── .env.example
-├── .gitignore
-└── README.md
-⚙️ Configuration
-Database Configuration
-Modify src/utils/config.py to adjust CassandraDB settings:
-pythonCASSANDRA_CONFIG = {
-    'hosts': ['localhost'],
-    'port': 9042,
-    'keyspace': 'rag_system',
-    'replication_strategy': 'SimpleStrategy',
-    'replication_factor': 1
-}
-Model Configuration
-Configure your preferred LLM in the same file:
-pythonLLM_CONFIG = {
-    'provider': 'openai',  # or 'huggingface'
-    'model_name': 'gpt-3.5-turbo',
-    'temperature': 0.7,
-    'max_tokens': 500
-}
-📖 Examples
-Basic Question Answering
-pythonfrom src.rag_system import RAGQuestionAnswering
-
-# Initialize
-rag = RAGQuestionAnswering()
-
-# Single question
-response = rag.ask_question("Explain machine learning")
-print(response)
-
-# Multiple questions
-questions = [
-    "What is artificial intelligence?",
-    "How does deep learning work?",
-    "What are the applications of NLP?"
-]
-
-for q in questions:
-    answer = rag.ask_question(q)
-    print(f"Q: {q}")
-    print(f"A: {answer}\n")
-Batch Document Processing
-pythonfrom src.utils.document_loader import DocumentLoader
-
-loader = DocumentLoader()
-documents = loader.load_directory("./documents/")
-rag.add_documents(documents)
-🧪 Testing
-Run the test suite:
-bash# Run all tests
-python -m pytest tests/
-
-# Run specific test file
-python -m pytest tests/test_rag_system.py -v
-
-# Run with coverage
-python -m pytest tests/ --cov=src/
-🤝 Contributing
-We welcome contributions! Please follow these steps:
-
-Fork the repository
-Create a feature branch (git checkout -b feature/amazing-feature)
-Commit your changes (git commit -m 'Add amazing feature')
-Push to the branch (git push origin feature/amazing-feature)
-Open a Pull Request
-
-Development Guidelines
-
-Follow PEP 8 style guidelines
-Add tests for new functionality
-Update documentation as needed
-Ensure all tests pass before submitting
-
-📝 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-🔗 Resources
-
-LangChain Documentation
-CassandraDB Documentation
-OpenAI API Documentation
-Vector Databases Guide
-
-📧 Contact
-
-Author: Your Name
-Email: your.email@example.com
-GitHub: @yourusername
-LinkedIn: Your Profile
 
 🙏 Acknowledgments
 
