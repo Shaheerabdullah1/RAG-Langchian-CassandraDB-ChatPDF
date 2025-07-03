@@ -14,7 +14,7 @@ Installation
 Clone the repository:
 
 bash
-Copy code
+Copy code files
 git clone https://github.com/yourusername/rag-question-answering.git
 cd rag-question-answering
 Create and activate a virtual environment:
